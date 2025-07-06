@@ -1,5 +1,5 @@
 const VERSION = '1.0.0';
-// sw.js (Service Worker)
+// service-worker.js (Service Worker)
 const CACHE_NAME = 'parcelas-cache-v1';
 const urlsToCache = [
   './', // Caching the root (index.html)
@@ -7,7 +7,15 @@ const urlsToCache = [
   './css/style.css',
   './js/main.js',
   './manifest.json',
+  './img/icon-48x48.png',
+  './img/icon-72x72.png',
+  './img/icon-96x96.png',
+  './img/icon-128x128.png',
+  './img/icon-144x144.png',
+  './img/icon-152x152.png',
   './img/icon-192x192.png',
+  './img/icon-256x256.png',
+  './img/icon-384x384.png',
   './img/icon-512x512.png',
   'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap' // Caching Google Fonts CSS
 ];
