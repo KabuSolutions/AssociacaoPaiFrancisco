@@ -54,6 +54,19 @@
       "type": "image/png"
     }
   ],
+  "screenshots": [
+  {
+    "src": "screenshot-wide.png",
+    "type": "image/png",
+    "sizes": "1280x720",
+    "form_factor": "wide"  
+  },
+  {
+    "src": "screenshot-mobile.png",
+    "type": "image/png",
+    "sizes": "375x667"
+  }
+  ],
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
