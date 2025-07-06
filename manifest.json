@@ -1,0 +1,21 @@
+{
+  "name": "Consulta de Parcelas",
+  "short_name": "Parcelas",
+  "description": "Consulte suas parcelas de forma rápida e fácil.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fefcf9",
+  "theme_color": "#5a3a2c",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
