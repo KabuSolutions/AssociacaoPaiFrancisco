@@ -1,7 +1,7 @@
 {
   "short_name": "APF",
   "name": "Associação Pai Francisco",
-  "description": "Consulte suas parcelas de forma rápida e fácil.",
+  "description": "Consulte suas mensalidades de forma rápida e fácil.",
   "icons": [
     {
       "src": "img/icon-48x48.png",
@@ -67,7 +67,8 @@
     "sizes": "375x667"
   }
   ],
-  "start_url": "/",
+  "start_url": "/AssociacaoPaiFrancisco/index.html",
+  "scope": "/AssociacaoPaiFrancisco/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000"
