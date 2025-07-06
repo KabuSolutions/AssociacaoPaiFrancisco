@@ -1,8 +1,8 @@
 {
-  "name": "Consulta de Parcelas",
-  "short_name": "Parcelas",
+  "short_name": "APF",
+  "name": "Associação Pai Francisco",
   "description": "Consulte suas parcelas de forma rápida e fácil.",
-  "start_url": "./",
+  "start_url": "/?source=pwa",
   "display": "standalone",
   "background_color": "#fefcf9",
   "theme_color": "#5a3a2c",
