@@ -58,7 +58,7 @@ async function consultar() {
     filtersContainer.style.display = 'grid';
     membro.textContent = `Mostrando dados de:\n${dados.membro.nome}`;
     membro.classList.add('active');
-    info.textContent = `Mensalidade atual: R$ ${dados.valorMensalidade} | Última atualização: ${formatarDataParaHumano(dados.ultimaAtualizacao)}`;
+    info.textContent = `Mensalidade atual: R$ ${dados.valorMensalidade} | Última atualização do extrato: ${formatarDataParaHumano(dados.ultimaAtualizacao)}`;
     info.classList.add('active');
   } catch (e) {
     erro.textContent = 'Erro ao buscar dados. Verifique o CPF ou tente novamente mais tarde.';
