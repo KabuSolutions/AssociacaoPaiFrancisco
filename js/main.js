@@ -51,8 +51,16 @@ async function consultar() {
     if (!resposta.ok) throw new Error('CPF não encontrado');
     const dados = await resposta.json();
 
-    todasParcelas = dados.parcelas;
-    exibirParcelas(todasParcelas);
+    const hoje = new Date();
+    const mesAtual = hoje.getMonth() + 1; // 0-indexado, por isso +1
+    const anoAtual = hoje.getFullYear();
+
+    const parcelasDoMesAtual = dados.parcelas.filter(p => {
+      const [_, mes, ano] = p.competencia.split('/');
+      return (parseInt(mes) <= mesAtual && parseInt(ano) === anoAtual) || parseInt(ano) < anoAtual;
+    });
+
+    exibirParcelas(parcelasDoMesAtual);
 
     tableResponsive.style.display = 'grid';
     filtersContainer.style.display = 'grid';
