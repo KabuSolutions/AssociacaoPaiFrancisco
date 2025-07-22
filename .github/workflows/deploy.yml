@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: .   # ou dist, se usar bundler
+          path: .   # ou "dist", se você tiver build separado
 
   deploy:
     needs: build
@@ -31,5 +31,6 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
         id: deployment
