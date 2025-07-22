@@ -1,0 +1,50 @@
+name: Build & Deploy PWA to GitHub Pages
+
+on:
+  push:
+    branches: [main]          # ajuste se usar outra branch
+
+permissions:
+  contents: write             # necessário para publicar no gh-pages
+  pages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Checkout do código
+      - uses: actions/checkout@v4
+
+      # 2) (Opcional) Instalar dependências e rodar build, se seu
+      #    projeto usar algum bundler.  Se for só HTML/CSS/JS estático,
+      #    pule esta etapa.
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
+      # - run: |
+      #     npm ci
+      #     npm run build        # diretório de saída -> ./dist
+
+      # 3) Gerar versão e injetar no service-worker
+      - name: Inject cache version
+        run: |
+          VERSION=$(git rev-parse --short HEAD)          # usa hash do commit
+          echo "Versão de cache: $VERSION"
+          # Se seu build sai em ./dist, troque ./ para ./dist/
+          sed -i "s/__CACHE_VERSION__/$VERSION/" service-worker.js
+
+      # 4) Fazer upload dos arquivos prontos (raiz do repo ou ./dist)
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: .          # ou 'dist' se você gerar build
+
+  # Job de publicação
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v2
+        id: deployment

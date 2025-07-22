@@ -8,9 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(registration => {
         console.log('Service Worker registrado com sucesso:', registration);
       })
+      .then(reg => {
+        reg.addEventListener('updatefound', () => {
+        const installing = reg.installing;
+        installing.onstatechange = () => {
+          if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+            // Versão nova acabou de ser instalada
+            window.location.reload(); // recarrega e serve a nova versão
+          }
+        };
+      })
       .catch(err => {
         console.log('Falha ao registrar Service Worker:', err);
-      });
+      })
+    });
   }
 
   // Eventos de filtros

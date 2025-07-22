@@ -1,6 +1,7 @@
 const VERSION = '1.0.0';
 // service-worker.js (Service Worker)
-const CACHE_NAME = 'parcelas-cache-v1';
+const CACHE_VERSION = "__CACHE_VERSION__";
+const CACHE_NAME = `associacao-cache-${CACHE_VERSION}`;
 const urlsToCache = [
   './', // Caching the root (index.html)
   './index.html',
@@ -22,6 +23,7 @@ const urlsToCache = [
 
 // Instalação: Cacheia os arquivos estáticos
 self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -50,14 +52,14 @@ self.addEventListener('fetch', event => {
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
+    caches.keys().then(cacheNames => 
+      Promise.all(
+        cacheNames.
+          filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
+      )
+    ).then(() => {
+      return self.clients.claim();
     })
   );
 });
