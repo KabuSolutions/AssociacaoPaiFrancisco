@@ -21,7 +21,7 @@ jobs:
           echo "Injecting version: $VERSION"
           sed -i "s/__CACHE_VERSION__/$VERSION/" service-worker.js
 
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: .   # ou "dist", se você tiver build separado
 
