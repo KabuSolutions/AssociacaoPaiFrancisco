@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write             # necessário para publicar no gh-pages
   pages: write
+  id-token: write
 
 jobs:
   build:
