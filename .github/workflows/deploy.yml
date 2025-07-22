@@ -34,7 +34,7 @@ jobs:
           sed -i "s/__CACHE_VERSION__/$VERSION/" service-worker.js
 
       # 4) Fazer upload dos arquivos prontos (raiz do repo ou ./dist)
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: .          # ou 'dist' se você gerar build
 
