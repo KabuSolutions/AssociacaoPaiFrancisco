@@ -21,7 +21,7 @@ jobs:
           echo "Injecting version: $VERSION"
           sed -i "s/__CACHE_VERSION__/$VERSION/" service-worker.js
 
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: .   # ou "dist", se você tiver build separado
 
@@ -32,5 +32,5 @@ jobs:
       name: github-pages
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
         id: deployment
