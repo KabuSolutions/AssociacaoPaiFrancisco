@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function consultar() {
   const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+  const senha = document.getElementById('senha').value;
   const membro = document.getElementById('membro');
   const info = document.getElementById('info');
   const erro = document.getElementById('erro');
@@ -58,8 +59,21 @@ async function consultar() {
   }
 
   try {
-    const resposta = await fetch(`${API_URL}mensalidade?cpf=${cpf}`);
-    if (!resposta.ok) throw new Error('CPF não encontrado');
+    const senhaHash = (await hashSenha(senha) || '');
+    const resposta = await fetch(`${API_URL}mensalidade?cpf=${cpf}&senha=${senhaHash}`);
+  
+    if (!resposta.ok) {
+      const mensagem = await resposta.text();
+      if(mensagem.trim() != ""){
+        erro.textContent = mensagem;
+      }
+      else{
+        erro.textContent = 'Erro ao consultar dados';
+      }
+      erro.classList.add('active');
+      return;
+    }
+
     const dados = await resposta.json();
 
     const hoje = new Date();
@@ -170,6 +184,14 @@ function aplicarFiltros() {
 function formatarDataParaHumano(dataTexto) {
   if (!dataTexto) return '';
   return dataTexto;
+}
+
+async function hashSenha(senha) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(senha);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 // Toast
